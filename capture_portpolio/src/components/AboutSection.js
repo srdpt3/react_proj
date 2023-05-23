@@ -1,5 +1,5 @@
 import React from "react";
-import home1 from "../img/home1.png";
+import home1 from "../img/home1.jpg";
 import { About, Image, Hide, Description } from "../styles";
 // Framer Motion
 import { motion } from "framer-motion";
@@ -11,20 +11,19 @@ const AboutSection = () => {
       <Description>
         <motion.div>
           <Hide>
-            <motion.h2 variants={titleAnim}>We work to make</motion.h2>
+            <motion.h2 variants={titleAnim}>To become a champion</motion.h2>
           </Hide>
           <Hide>
             <motion.h2 variants={titleAnim}>
-              your <span>dreams</span> come
+              fight <span>one more</span> round
             </motion.h2>
           </Hide>
           <Hide>
-            <motion.h2 variants={titleAnim}>true.</motion.h2>
+            <motion.h2 variants={titleAnim}> - Muhammad Ali.</motion.h2>
           </Hide>
         </motion.div>
         <motion.p variants={fade}>
-          Contact us for any photography or videography ideas that you have. We
-          have professionals with amazing skills
+          Contact us for beginner friendly boxing & strength training.
         </motion.p>
         <motion.button variants={fade}>Contact Us</motion.button>
       </Description>
