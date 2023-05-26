@@ -6,17 +6,24 @@ import athlete from "../img/athlete-small.png";
 import theracer from "../img/theracer-small.png";
 import goodtimes from "../img/goodtimes-small.png";
 import { motion } from "framer-motion";
+import useScroll from "../components/useScroll";
 import {
   slider,
   pageAnimation,
   fade,
   photoAnim,
   lineAnim,
+  scrollReveal,
   sliderContainer,
+  swoopAdoop,
 } from "../animation";
 const OurWork = () => {
+  const [element, controls] = useScroll();
+  const [element2, controls2] = useScroll();
+
   return (
     <Work
+      layout="position"
       exit="exit"
       variants={pageAnimation}
       initial="hidden"
@@ -31,7 +38,7 @@ const OurWork = () => {
       </motion.div>
 
       <Movie>
-        <motion.h2 variants={fade}>The Athelete</motion.h2>
+        <motion.h2 variants={swoopAdoop}>The Athelete</motion.h2>
         <motion.div variants={lineAnim} className="line"></motion.div>
         <Link to="/work/the-athlete">
           <Hide>
@@ -44,18 +51,27 @@ const OurWork = () => {
         </Link>
       </Movie>
 
-      <Movie>
-        <h2>The Racer</h2>
-        <div className="line"></div>
+      <Movie
+        variants={swoopAdoop}
+        animate={controls}
+        initial="hidden"
+        ref={element}
+      >
+        <h2>Kick Boxing</h2>
+        <motion.div variants={lineAnim} className="line"></motion.div>
         <Link to="/work/the-racer">
           <img src={theracer} alt="theracer"></img>
         </Link>
       </Movie>
 
-      <Movie>
-        <h2>Good Times</h2>
-        <div className="line"></div>
-
+      <Movie
+        variants={scrollReveal}
+        animate={controls2}
+        initial="hidden"
+        ref={element2}
+      >
+        <h2>Conditioning</h2>
+        <motion.div variants={lineAnim} className="line"></motion.div>
         <Link to="/work/good-times">
           <img src={goodtimes} alt="goodtimes"></img>
         </Link>
@@ -68,12 +84,20 @@ const Work = styled(motion.div)`
   min-height: 100vh;
   overflow: hidden;
   padding: 5rem 10rem;
+
+  @media (max-width: 1300px) {
+    display: block;
+    padding: 2rem 2rem;
+    text-align: center;
+  }
+
   h2 {
     padding: 1rem 0rem;
   }
+  padding: 2rem;
 `;
 
-const Movie = styled.div`
+const Movie = styled(motion.div)`
   padding-bottom: 10rem;
   .line {
     height: 0.5rem;
@@ -94,9 +118,9 @@ const Hide = styled.div`
 const Frame1 = styled(motion.div)`
   position: fixed;
   left: 0;
-  top: 10%;
+  top: 0%;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background: #fffebf;
   z-index: 2;
 `;
