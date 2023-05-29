@@ -11,16 +11,18 @@ import GraphicEqIcon from "@mui/icons-material/GraphicEq";
 import TheaterComedyIcon from "@mui/icons-material/TheaterComedy";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import DeveloperModeIcon from "@mui/icons-material/DeveloperMode";
+import { MusicVideo } from "@mui/icons-material";
 
 export const logo = "https://i.ibb.co/s9Qys2j/logo.png";
 
 export const categories = [
-  { name: "New", icon: <HomeIcon /> },
-  { name: "JS Mastery", icon: <CodeIcon /> },
-  { name: "Coding", icon: <CodeIcon /> },
-  { name: "ReactJS", icon: <CodeIcon /> },
-  { name: "NextJS", icon: <CodeIcon /> },
-  { name: "Music", icon: <MusicNoteIcon /> },
+  { name: "뉴스", icon: <HomeIcon /> },
+  { name: "드라마", icon: <MusicVideo /> },
+  { name: "UFC", icon: <CodeIcon /> },
+  { name: "90s HipHop", icon: <MusicVideo /> },
+  { name: "슈이비닝", icon: <LiveTvIcon /> },
+  { name: "격시탈", icon: <LiveTvIcon /> },
+  { name: "삼프로", icon: <LiveTvIcon /> },
   { name: "Education", icon: <SchoolIcon /> },
   { name: "Podcast", icon: <GraphicEqIcon /> },
   { name: "Movie", icon: <OndemandVideoIcon /> },
