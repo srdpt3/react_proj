@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Box, Stack, Typography } from "@mui/material";
-import axios from "axios";
 
 import { fetchFromAPI } from "../utils/fetchFromAPI";
 import { Videos, SideBar } from "./";
@@ -10,11 +9,9 @@ const Feed = () => {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    const resp = fetchFromAPI(`search?part=snippet&q=${selectedCategory}`).then(
-      (data) => {
-        setVideos(data.items);
-      }
-    );
+    fetchFromAPI(`search?part=snippet&q=${selectedCategory}`).then((data) => {
+      setVideos(data.items);
+    });
   }, [selectedCategory]);
 
   return (
