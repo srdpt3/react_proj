@@ -7,14 +7,12 @@ import {
 } from "../api";
 
 //Action Creator
-
+const params = {
+  params: {
+    key: "fb3238928e42496186ba12f60a181af2",
+  },
+};
 export const loadGames = () => async (dispatch2) => {
-  const params = {
-    params: {
-      key: "fb3238928e42496186ba12f60a181af2",
-    },
-  };
-
   //FETCH AXIOS
   const popularData = await axios.get(popularGamesURL(), params);
   const newGamesData = await axios.get(newGamesURL(), params);
@@ -30,7 +28,7 @@ export const loadGames = () => async (dispatch2) => {
 };
 
 export const fetchSearch = (game_name) => async (dispatch) => {
-  const searchGames = await axios.get(searchGameURL(game_name));
+  const searchGames = await axios.get(searchGameURL(game_name), params);
 
   dispatch({
     type: "FETCH_SEARCHED",
