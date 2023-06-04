@@ -1,4 +1,6 @@
 import axios from "axios";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
 import {
   popularGamesURL,
   upcomingGamesURL,
@@ -9,15 +11,15 @@ import {
 //Action Creator
 const params = {
   params: {
-    key: "fb3238928e42496186ba12f60a181af2",
+    key: "202be6fa437944b39806ffab9199ac8b",
   },
 };
-export const loadGames = () => async (dispatch2) => {
+export const loadGames = () => async (dispatch) => {
   //FETCH AXIOS
   const popularData = await axios.get(popularGamesURL(), params);
   const newGamesData = await axios.get(newGamesURL(), params);
   const upcomingData = await axios.get(upcomingGamesURL(), params);
-  dispatch2({
+  dispatch({
     type: "FETCH_GAMES",
     payload: {
       popular: popularData.data.results,
@@ -28,7 +30,7 @@ export const loadGames = () => async (dispatch2) => {
 };
 
 export const fetchSearch = (game_name) => async (dispatch) => {
-  const searchGames = await axios.get(searchGameURL(game_name), params);
+  const searchGames = await axios.get(searchGameURL(game_name));
 
   dispatch({
     type: "FETCH_SEARCHED",
