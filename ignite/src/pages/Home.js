@@ -15,13 +15,41 @@ const Home = () => {
   // GET that data back
 
   const { popular, newGames, upcoming } = useSelector((state) => state.games);
-  console.log(upcoming);
   return (
     <GameList>
+      <h2> upcoming Games</h2>
+
       <Games>
-        upcoming Games
         {upcoming &&
           upcoming.map((game) => (
+            <Game
+              name={game.name}
+              released={game.released}
+              id={game.id}
+              image={game.background_image}
+              key={game.id}
+            />
+          ))}
+      </Games>
+      <h2> New Games</h2>
+
+      <Games>
+        {newGames &&
+          newGames.map((game) => (
+            <Game
+              name={game.name}
+              released={game.released}
+              id={game.id}
+              image={game.background_image}
+              key={game.id}
+            />
+          ))}
+      </Games>
+      <h2> Popular Games</h2>
+
+      <Games>
+        {popular &&
+          popular.map((game) => (
             <Game
               name={game.name}
               released={game.released}
