@@ -37,9 +37,7 @@ export const popularGamesURL = () => `${base_url}${popular_games}`;
 export const upcomingGamesURL = () => `${base_url}${upcoming_games}`;
 export const newGamesURL = () => `${base_url}${newGames}`;
 //GAME DETAILS
-export const gameDetailsURL = (game_id) =>
-  `${base_url}games/${game_id}.json?&key=${process.env.REACT_APP_RAWG_API_KEY}`;
-
+export const gameDetailsURL = (game_id) => `${base_url}games/${game_id}`;
 //Game ScreenShots
 export const gameScreenshotURL = (game_id) =>
   `${base_url}games/${game_id}/screenshots`;

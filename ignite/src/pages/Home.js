@@ -46,7 +46,6 @@ const Home = () => {
           ))}
       </Games>
       <h2> Popular Games</h2>
-
       <Games>
         {popular &&
           popular.map((game) => (
