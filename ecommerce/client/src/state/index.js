@@ -30,7 +30,7 @@ export const cartSlice = createSlice({
       });
     },
 
-    decreateCount: (state, action) => {
+    decreaseCount: (state, action) => {
       state.cart = state.cart.map((item) => {
         if (item.id === action.payload.id && item.count > 1) {
           item.count--;
@@ -50,7 +50,7 @@ export const {
   addToCart,
   removeFromCart,
   increaseCount,
-  decreateCount,
+  decreaseCount,
   setIsCartOpen,
 } = cartSlice.actions;
 
