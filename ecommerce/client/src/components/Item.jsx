@@ -18,11 +18,7 @@ const Item = ({ item, width }) => {
   const { category, price, name, image } = item.attributes;
   const {
     data: {
-      attributes: {
-        formats: {
-          medium: { url },
-        },
-      },
+      attributes: { url },
     },
   } = image;
   return (
@@ -36,7 +32,7 @@ const Item = ({ item, width }) => {
           alt={item.name}
           width="300px"
           height="400px"
-          src={`http://localhost:2000${url}`}
+          src={`http://localhost:1337${url}`}
           onClick={() => navigate(`/item/${item.id}`)}
           style={{ cursor: "pointer" }}
         />
