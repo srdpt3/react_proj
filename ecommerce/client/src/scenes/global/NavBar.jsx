@@ -39,10 +39,11 @@ const NavBar = () => {
       >
         <Box
           onClick={() => navigate("/")}
+          fontSize="20px"
           sx={{ "&:hover": { cursor: "pointer" } }}
           color={shades.secondary[500]}
         >
-          ECOMMER
+          Wedding Band
         </Box>
         <Box
           display="flex"
