@@ -23,13 +23,12 @@ function Footer() {
             mb="30px"
             color={shades.secondary[500]}
           >
-            ECOMMER
+            Yunjimi
           </Typography>
           <div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat
+            Sometimes I wonder why our paths decided to collide We started off
+            as perfect strangers Boy meets girl, infatuation to love Now you're
+            my whole entire world
           </div>
         </Box>
 
@@ -57,11 +56,9 @@ function Footer() {
           <Typography variant="h4" fontWeight="bold" mb="30px">
             Contact Us
           </Typography>
-          <Typography mb="30px">
-            7154 170th street, Fresh Meadows, NY 11365
-          </Typography>
+          <Typography mb="30px">New York</Typography>
           <Typography mb="30px" sx={{ wordWrap: "break-word" }}>
-            Email: srdpt3@gmail.com
+            Developer: srdpt3
           </Typography>
           <Typography mb="30px">(222)333-4444</Typography>
         </Box>

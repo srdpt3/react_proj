@@ -21,7 +21,7 @@ const ShoppingList = () => {
 
   async function getItems() {
     const items = await fetch(
-      "http://localhost:1337/api/items?populate=image",
+      "https://weddingband.herokuapp.com/api/items?populate=image",
       { method: "GET" }
     );
     const itemsJson = await items.json();
@@ -35,7 +35,6 @@ const ShoppingList = () => {
   const CartierItems = items.filter(
     (item) => item.attributes.category === "Cartier"
   );
-  console.log("CartierItems", CartierItems);
   const BoucheronItems = items.filter(
     (item) => item.attributes.category === "Boucheron"
   );
@@ -68,7 +67,7 @@ const ShoppingList = () => {
         centered
         TabIndicatorProps={{ sx: { display: breakPoint ? "block" : "none" } }}
         sx={{
-          m: "25px",
+          m: "10px",
           "& .MuiTabs-flexContainer": {
             flexWrap: "wrap",
           },
@@ -81,6 +80,7 @@ const ShoppingList = () => {
         <Tab label="Graff" value="Graff" />
         <Tab label="Piaget" value="Piaget" />
         <Tab label="Tiffany & Co" value="Tiffany & Co" />
+        <Tab label="Chaumet" value="Chaumet" />
       </Tabs>
       <Box
         margin="0 auto"
@@ -104,6 +104,21 @@ const ShoppingList = () => {
           ))}
         {value === "Boucheron" &&
           BoucheronItems.map((item) => (
+            <Item item={item} key={`${item.name}-${item.id}`} />
+          ))}
+
+        {value === "Graff" &&
+          GraffItems.map((item) => (
+            <Item item={item} key={`${item.name}-${item.id}`} />
+          ))}
+
+        {value === "Piaget" &&
+          PiagetItems.map((item) => (
+            <Item item={item} key={`${item.name}-${item.id}`} />
+          ))}
+
+        {value === "Tiffany & Co" &&
+          TiffanyItems.map((item) => (
             <Item item={item} key={`${item.name}-${item.id}`} />
           ))}
       </Box>

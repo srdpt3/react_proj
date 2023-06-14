@@ -61,7 +61,13 @@ const MainCarousel = () => {
           <img
             src={texture}
             alt={`carousel-${index}`}
-            style={{
+            // style={{
+            //   width: "100%",
+            //   height: "700px",
+            //   objectFit: "cover",
+            //   backgroundAttachment: "fixed",
+            // }}
+            sx={{
               width: "100%",
               height: "700px",
               objectFit: "cover",

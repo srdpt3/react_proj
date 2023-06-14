@@ -24,7 +24,7 @@ const ItemDetail = () => {
 
   async function getItem() {
     const item = await fetch(
-      `http://localhost:1337/api/items/${itemId}?populate=image`,
+      `https://weddingband.herokuapp.com/api/items/${itemId}?populate=image`,
       {
         method: "GET",
       }
@@ -35,7 +35,7 @@ const ItemDetail = () => {
 
   async function getItems() {
     const items = await fetch(
-      `http://localhost:1337/api/items?populate=image`,
+      `https://weddingband.herokuapp.com/api/items?populate=image`,
       {
         method: "GET",
       }
@@ -56,9 +56,9 @@ const ItemDetail = () => {
         <Box flex="1 1 40%" mb="40px">
           <img
             alt={item?.name}
-            width="100%"
-            height="100%"
-            src={`http://localhost:1337${item?.attributes?.image?.data?.attributes?.url}`}
+            width="105%"
+            height="105%"
+            src={`https://weddingband.herokuapp.com${item?.attributes?.image?.data?.attributes?.url}`}
             style={{ objectFit: "contain" }}
           />
         </Box>
