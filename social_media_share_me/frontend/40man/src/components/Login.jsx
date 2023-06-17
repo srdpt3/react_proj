@@ -12,21 +12,22 @@ const Login = () => {
 
   const responseGoogle = (response) => {
     const decoded = jwt_decode(response.credential);
+    localStorage.setItem("user", JSON.stringify(decoded));
+
     const { name, sub, picture } = decoded;
     console.log(name);
     console.log(picture);
 
-    // localStorage.setItem("user", JSON.stringify(decoded));
-    // const { name, googleId, imageUrl } = decoded;
-    // const doc = {
-    //   _id: googleId,
-    //   _type: "user",
-    //   UserName: name,
-    //   image: imageUrl,
-    // };
-    // client.createIfNotExists(doc).then(() => {
-    //   navigate("/", { replace: true });
-    // });
+    const doc = {
+      _id: sub,
+      _type: "user",
+      userName: name,
+      image: picture,
+    };
+
+    client.createIfNotExists(doc).then(() => {
+      navigate("/", { replace: true });
+    });
   };
 
   return (
