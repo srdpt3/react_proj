@@ -19,6 +19,7 @@ function App() {
           <Route index element={<IndexPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/account/:subpage?" element={<Account />} />
+          <Route path="/account/:subpage/:action?" element={<Account />} />
 
           <Route path="/register" element={<Register />} />
         </Route>
