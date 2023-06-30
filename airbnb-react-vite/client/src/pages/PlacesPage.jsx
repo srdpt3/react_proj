@@ -6,6 +6,30 @@ const PlacesPage = () => {
   const [title, setTitle] = useState("");
   const [address, setAddress] = useState("");
   const [addPhotos, setAddPhtos] = useState([]);
+  const [photoLink, setPhotoLink] = useState("");
+  const [extraInfo, setExtraInfo] = useState("");
+  const [perks, setPerks] = useState("");
+  const [checkIn, setCheckIn] = useState("");
+  const [checkOut, setCheckOut] = useState("");
+  const [maxGuests, setMaxGuets] = useState(1);
+
+  function inputHeader(text) {
+    return <h2 className="text-2xl mt-4">{text}</h2>;
+  }
+
+  function inputDescription(text) {
+    return <p className="text-sm text-gray-500">{text}</p>;
+  }
+
+  function preInput(header, description) {
+    return (
+      <>
+        {inputHeader(header)}
+        {inputDescription(description)}
+      </>
+    );
+  }
+
   const handleCbClick = () => {};
   return (
     <div>
@@ -36,20 +60,17 @@ const PlacesPage = () => {
       {action === "new" && (
         <div>
           <form>
-            <h2 className="text-2xl mt-4">Title</h2>
-            <p className="text-sm text-gray-500">
-              title for your place, should be short and catchy as in
-              advertisement
-            </p>
+            {preInput(
+              "Title",
+              "title for your place, should be short and catchy as in advertisement"
+            )}
             <input
               type="text"
               placeholder="title, for example,: my lovely apt"
             ></input>
-            <h2 className="text-2xl mt-4">Address</h2>
-            <p className="text-sm text-gray-500">Address to this place</p>
+            {preInput("Address", "Address to this place")}
             <input type="text" placeholder="address"></input>
-            <h2 className="text-2xl mt-4">Photos</h2>
-            <p className="text-sm text-gray-500">more = better</p>
+            {preInput("Photos", "more = better")}
             <div className="flex gap-2">
               <input
                 type="text"
@@ -65,13 +86,9 @@ const PlacesPage = () => {
                 Upload from your device
               </button>
             </div>
-            <h2 className="text-2xl mt-4">Description</h2>
-            <p className="text-sm text-gray-500">Description of the place</p>
+            {preInput("Description", "Description of the place")}
             <textarea />
-            <h2 className="text-2xl mt-4">Perks</h2>
-            <p className="text-sm text-gray-500">
-              select all the perks of your places
-            </p>
+            {preInput("Perks", "Select all the perks of your places")}
             <div className="grid mt-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
               <label className="border p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
                 <input
@@ -212,12 +229,14 @@ const PlacesPage = () => {
                 <span>Private entrance</span>
               </label>
             </div>
-            <div></div>
-            <h2 className="text-2xl mt-4">Check in&out times</h2>
-            <p className="text-sm text-gray-500">
-              add chec in adn out times, remember to have some time windows for
-              clearning the room between guests
-            </p>
+
+            {preInput("Extra info", "house rules, etc")}
+            <textarea />
+
+            {preInput(
+              "Check in&out times",
+              "add chec in adn out times, remember to have some time windows for learning the room between guests"
+            )}
             <div className="grid gap-2 sm:grid-cols-3">
               <div>
                 <h3 className="mt-2 -mb-1">Check in times</h3>
