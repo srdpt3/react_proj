@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Perks from "../Perks";
+import axios from "axios";
 
 const PlacesPage = () => {
   const { action } = useParams();
   const [title, setTitle] = useState("");
   const [address, setAddress] = useState("");
-  const [addPhotos, setAddPhtos] = useState([]);
+  const [addedPhotos, setAddedPhotos] = useState([]);
   const [description, setDescription] = useState("");
   const [photoLink, setPhotoLink] = useState("");
   const [extraInfo, setExtraInfo] = useState("");
@@ -30,6 +31,35 @@ const PlacesPage = () => {
         {inputDescription(description)}
       </>
     );
+  }
+  async function addPhotoByLink(ev) {
+    ev.preventDefault();
+    const { data: filename } = await axios.post("/upload-by-link", {
+      link: photoLink,
+    });
+    setAddedPhotos((prev) => {
+      return [...prev, filename];
+    });
+    setPhotoLink("");
+  }
+
+  async function uploadPhoto(ev) {
+    const files = ev.target.files;
+    const data = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      data.append("photos", files[i]);
+    }
+
+    axios
+      .post("upload", data, {
+        headers: { "Content-type": "multipart/form-data" },
+      })
+      .then((resp) => {
+        const { data: filenames } = resp;
+        setAddedPhotos((prev) => {
+          return [...prev, ...filenames];
+        });
+      });
   }
 
   return (
@@ -86,16 +116,34 @@ const PlacesPage = () => {
                 onChange={(ev) => setPhotoLink(ev.target.value)}
                 placeholder="{'Add using a link ...jpg'}"
               ></input>
-              <button className="bg-gray-200 px-4 rounded-2xl">
+              <button
+                onClick={addPhotoByLink}
+                className="bg-gray-200 px-4 rounded-2xl"
+              >
                 Add&nbsp;photo
               </button>
             </div>
-
-            <div className="mt-2 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-              <button className="border bg-transparent rounded-2xl p-8 text-2xl text-gray-600">
+            <div className="mt-2  gap-2 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+              {addedPhotos.length > 0 &&
+                addedPhotos.map((link) => (
+                  <div className="h-32 flex">
+                    <img
+                      className="rounded-2xl w-full object-cover"
+                      src={"http://localhost:4000/uploads/" + link}
+                    ></img>
+                  </div>
+                ))}
+              <label className="h-32 cursor-pointer items-center flex border bg-transparent rounded-2xl p-8 text-2xl text-gray-600">
+                <input
+                  type="file"
+                  className="hidden"
+                  multiple
+                  onChange={uploadPhoto}
+                ></input>
                 Upload from your device
-              </button>
+              </label>
             </div>
+
             {preInput("Description", "Description of the place")}
             <textarea
               value={description}
@@ -139,7 +187,7 @@ const PlacesPage = () => {
               <div>
                 <h3 className="mt-2 -mb-1">Max number of guests</h3>
                 <input
-                  type="text"
+                  type="number"
                   value={maxGuests}
                   onChange={(ev) => setMaxGuets(ev.target.value)}
                 ></input>

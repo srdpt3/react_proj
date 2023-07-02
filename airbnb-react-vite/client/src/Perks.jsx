@@ -1,11 +1,17 @@
 import React from "react";
 
-const Perks = () => {
-  const handleCbClick = () => {};
+const Perks = ({ selected, onChange }) => {
+  const handleCbClick = (ev) => {
+    const { checked, name } = ev.target;
+    if (checked) {
+      onChange([...selected, name]);
+    } else {
+      onChange([...selected.filter((selectedName) => selectedName !== name)]);
+    }
+  };
 
   return (
-    <div>
-      {" "}
+    <>
       <label className="border p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
         <input
           type="checkbox"
@@ -144,7 +150,7 @@ const Perks = () => {
         </svg>
         <span>Private entrance</span>
       </label>
-    </div>
+    </>
   );
 };
 
