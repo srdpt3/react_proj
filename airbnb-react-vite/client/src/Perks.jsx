@@ -15,7 +15,7 @@ const Perks = ({ selected, onChange }) => {
       <label className="border p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
         <input
           type="checkbox"
-          checked={true}
+          // checked={true}
           name="wifi"
           onChange={handleCbClick}
         />
@@ -38,7 +38,7 @@ const Perks = ({ selected, onChange }) => {
       <label className="border p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
         <input
           type="checkbox"
-          checked={true}
+          // checked={true}
           name="parking"
           onChange={handleCbClick}
         />

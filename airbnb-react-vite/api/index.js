@@ -4,6 +4,8 @@ const bcrypt = require("bcryptjs");
 require("dotenv").config();
 const cors = require("cors");
 const User = require("./models/User");
+const Place = require("./models/Place");
+
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const multer = require("multer");
@@ -113,6 +115,42 @@ app.post("/upload", photoMiddleware.array("photos", 100), async (req, res) => {
     uploadedfiles.push(newPath.replace("uploads/", ""));
   }
   res.json(uploadedfiles);
+});
+
+app.post("/places", async (req, res) => {
+  const { token } = req.cookies;
+  jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+    if (err) throw err;
+
+    const {
+      title,
+      address,
+      addedPhotos,
+      description,
+      perks,
+      extraInfo,
+      checkIn,
+      checkOut,
+      maxGuests,
+    } = req.body;
+    try {
+      const placeDoc = await Place.create({
+        owner: userData.id,
+        title,
+        address,
+        addedPhotos,
+        description,
+        perks,
+        extraInfo,
+        checkIn,
+        checkOut,
+        maxGuests,
+      });
+      res.json(placeDoc);
+    } catch (e) {
+      res.status(422).json(e);
+    }
+  });
 });
 
 app.listen(4000);
