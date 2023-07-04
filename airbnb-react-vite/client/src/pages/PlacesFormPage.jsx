@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import Perks from "../Perks";
 import axios from "axios";
-import PhotoUoloader from "../PhotoUoloader";
+import PhotoUploader from "../PhotoUploader";
+import AccountNav from "../AccountNav";
 
 const PlacesFormPage = () => {
+  const { id } = useParams();
   const [title, setTitle] = useState("");
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
@@ -14,7 +16,29 @@ const PlacesFormPage = () => {
   const [perks, setPerks] = useState("");
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
-  const [maxGuests, setMaxGuets] = useState(1);
+  const [maxGuests, setMaxGuests] = useState(1);
+  const [price, setPrice] = useState(100);
+
+  const [redirect, setRedirect] = useState(false);
+
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+    axios.get("/places/" + id).then((response) => {
+      const { data } = response;
+      setTitle(data.title);
+      setAddress(data.address);
+      setAddedPhotos(data.photos);
+      setDescription(data.description);
+      setPerks(data.perks);
+      setExtraInfo(data.extraInfo);
+      setCheckIn(data.checkIn);
+      setCheckOut(data.checkOut);
+      setMaxGuests(data.maxGuests);
+      //   setPrice(data.price);
+    });
+  }, [id]);
 
   function inputHeader(text) {
     return <h2 className="text-2xl mt-4">{text}</h2>;
@@ -47,10 +71,15 @@ const PlacesFormPage = () => {
       maxGuests,
     };
     await axios.post("/places", placeData);
+    setRedirect(true);
+  }
+  if (redirect) {
+    return <Navigate to={"/account/places"}></Navigate>;
   }
   return (
     <>
       <div>
+        <AccountNav />
         <form onSubmit={addNewPlace}>
           {preInput(
             "Title",
@@ -71,10 +100,10 @@ const PlacesFormPage = () => {
           ></input>
           {preInput("Photos", "more = better")}
 
-          <PhotoUoloader
+          <PhotoUploader
             addedPhotos={addedPhotos}
             onChange={setAddedPhotos}
-          ></PhotoUoloader>
+          ></PhotoUploader>
 
           {preInput("Description", "Description of the place")}
           <textarea
@@ -121,7 +150,7 @@ const PlacesFormPage = () => {
               <input
                 type="number"
                 value={maxGuests}
-                onChange={(ev) => setMaxGuets(ev.target.value)}
+                onChange={(ev) => setMaxGuests(ev.target.value)}
               ></input>
             </div>
           </div>

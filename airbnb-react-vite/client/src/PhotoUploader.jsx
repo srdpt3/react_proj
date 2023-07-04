@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-const PhotoUoloader = ({ addedPhotos, onChange }) => {
+const PhotoUploader = ({ addedPhotos, onChange }) => {
   const [photoLink, setPhotoLink] = useState("");
 
   async function addPhotoByLink(ev) {
@@ -73,4 +73,4 @@ const PhotoUoloader = ({ addedPhotos, onChange }) => {
   );
 };
 
-export default PhotoUoloader;
+export default PhotoUploader;

@@ -138,7 +138,7 @@ app.post("/places", async (req, res) => {
         owner: userData.id,
         title,
         address,
-        addedPhotos,
+        photos: addedPhotos,
         description,
         perks,
         extraInfo,
@@ -150,6 +150,24 @@ app.post("/places", async (req, res) => {
     } catch (e) {
       res.status(422).json(e);
     }
+  });
+});
+
+app.get("/places", async (req, res) => {
+  const { token } = req.cookies;
+  jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+    if (err) throw err;
+    const { id } = userData;
+    res.json(await Place.find({ owner: id }));
+  });
+});
+
+app.get("/places/:id", async (req, res) => {
+  const { token } = req.cookies;
+  jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+    if (err) throw err;
+    const { id } = userData;
+    res.json(await Place.find({ owner: id }));
   });
 });
 
