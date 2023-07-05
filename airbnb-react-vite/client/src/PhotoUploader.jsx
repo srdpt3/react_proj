@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 const PhotoUploader = ({ addedPhotos, onChange }) => {
   const [photoLink, setPhotoLink] = useState("");
@@ -50,7 +49,8 @@ const PhotoUploader = ({ addedPhotos, onChange }) => {
         </button>
       </div>
       <div className="mt-2 gap-2 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-        {addedPhotos.length > 0 &&
+        {addedPhotos &&
+          addedPhotos.length > 0 &&
           addedPhotos.map((link) => (
             <div className="h-32 flex" key={link}>
               <img

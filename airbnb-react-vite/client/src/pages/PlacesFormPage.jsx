@@ -20,24 +20,33 @@ const PlacesFormPage = () => {
   const [price, setPrice] = useState(100);
 
   const [redirect, setRedirect] = useState(false);
+  const [data, setData] = useState("");
 
   useEffect(() => {
     if (!id) {
+      console.log("no id");
+
       return;
     }
-    axios.get("/places/" + id).then((response) => {
-      const { data } = response;
-      setTitle(data.title);
-      setAddress(data.address);
-      setAddedPhotos(data.photos);
-      setDescription(data.description);
-      setPerks(data.perks);
-      setExtraInfo(data.extraInfo);
-      setCheckIn(data.checkIn);
-      setCheckOut(data.checkOut);
-      setMaxGuests(data.maxGuests);
-      //   setPrice(data.price);
-    });
+    async function GetData() {
+      var response = await axios.get("/places/" + id);
+      setData(response.data[0]);
+      if (data) {
+        setTitle(data.title);
+        setAddress(data.address);
+        setAddedPhotos(data.photos);
+        setDescription(data.description);
+        setPerks(data.perks);
+        setExtraInfo(data.extraInfo);
+        setCheckIn(data.checkIn);
+        setCheckOut(data.checkOut);
+        setMaxGuests(data.maxGuests);
+        //   setPrice(data.price);
+
+        console.log("data", data.title);
+      }
+    }
+    GetData();
   }, [id]);
 
   function inputHeader(text) {
