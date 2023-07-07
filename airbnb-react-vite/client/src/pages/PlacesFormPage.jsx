@@ -24,30 +24,27 @@ const PlacesFormPage = () => {
 
   useEffect(() => {
     if (!id) {
-      console.log("no id");
-
       return;
     }
     async function GetData() {
       var response = await axios.get("/places/" + id);
       setData(response.data[0]);
-      if (data) {
-        setTitle(data.title);
-        setAddress(data.address);
-        setAddedPhotos(data.photos);
-        setDescription(data.description);
-        setPerks(data.perks);
-        setExtraInfo(data.extraInfo);
-        setCheckIn(data.checkIn);
-        setCheckOut(data.checkOut);
-        setMaxGuests(data.maxGuests);
-        //   setPrice(data.price);
-
-        console.log("data", data.title);
-      }
     }
     GetData();
+    if (data) {
+      setTitle(data.title);
+      setAddress(data.address);
+      setAddedPhotos(data.photos);
+      setDescription(data.description);
+      setPerks(data.perks);
+      setExtraInfo(data.extraInfo);
+      setCheckIn(data.checkIn);
+      setCheckOut(data.checkOut);
+      setMaxGuests(data.maxGuests);
+      //   setPrice(data.price);
+    }
   }, [id]);
+  console.log("data", data.title);
 
   function inputHeader(text) {
     return <h2 className="text-2xl mt-4">{text}</h2>;
@@ -66,7 +63,7 @@ const PlacesFormPage = () => {
     );
   }
 
-  async function addNewPlace(ev) {
+  async function savePlace(ev) {
     ev.preventDefault();
     const placeData = {
       title,
@@ -79,8 +76,17 @@ const PlacesFormPage = () => {
       checkOut,
       maxGuests,
     };
-    await axios.post("/places", placeData);
-    setRedirect(true);
+    if (id) {
+      //update
+
+      await axios.put("/places", { id, ...placeData });
+      setRedirect(true);
+    } else {
+      // new place
+
+      await axios.post("/places", placeData);
+      setRedirect(true);
+    }
   }
   if (redirect) {
     return <Navigate to={"/account/places"}></Navigate>;
@@ -89,7 +95,7 @@ const PlacesFormPage = () => {
     <>
       <div>
         <AccountNav />
-        <form onSubmit={addNewPlace}>
+        <form onSubmit={savePlace}>
           {preInput(
             "Title",
             "title for your place, should be short and catchy as in advertisement"

@@ -15,7 +15,7 @@ const Perks = ({ selected, onChange }) => {
       <label className="border p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
         <input
           type="checkbox"
-          // checked={true}
+          checked={selected.includes("wifi")}
           name="wifi"
           onChange={handleCbClick}
         />
@@ -38,7 +38,7 @@ const Perks = ({ selected, onChange }) => {
       <label className="border p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
         <input
           type="checkbox"
-          // checked={true}
+          checked={selected.includes("parking")}
           name="parking"
           onChange={handleCbClick}
         />
@@ -61,7 +61,7 @@ const Perks = ({ selected, onChange }) => {
       <label className="border p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
         <input
           type="checkbox"
-          checked={true}
+          checked={selected.includes("tv")}
           name="tv"
           onChange={handleCbClick}
         />
@@ -84,7 +84,7 @@ const Perks = ({ selected, onChange }) => {
       <label className="border p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
         <input
           type="checkbox"
-          checked={true}
+          checked={selected.includes("radio")}
           name="radio"
           onChange={handleCbClick}
         />
@@ -107,8 +107,8 @@ const Perks = ({ selected, onChange }) => {
       <label className="border p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
         <input
           type="checkbox"
-          checked={true}
           name="pets"
+          checked={selected.includes("pets")}
           onChange={handleCbClick}
         />
         <svg
@@ -130,7 +130,7 @@ const Perks = ({ selected, onChange }) => {
       <label className="border p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
         <input
           type="checkbox"
-          checked={true}
+          checked={selected.includes("entrance")}
           name="entrance"
           onChange={handleCbClick}
         />
