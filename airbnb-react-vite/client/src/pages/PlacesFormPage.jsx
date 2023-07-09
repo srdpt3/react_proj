@@ -69,6 +69,7 @@ const PlacesFormPage = () => {
       checkIn,
       checkOut,
       maxGuests,
+      price,
     };
     if (id) {
       //update
@@ -135,7 +136,7 @@ const PlacesFormPage = () => {
             "Check in&out times",
             "add chec in adn out times, remember to have some time windows for learning the room between guests"
           )}
-          <div className="grid gap-2 sm:grid-cols-3">
+          <div className="grid gap-2 sm:grid-cols-2 md:grid-cols-4">
             <div>
               <h3 className="mt-2 -mb-1">Check in times</h3>
               <input
@@ -160,6 +161,15 @@ const PlacesFormPage = () => {
                 type="number"
                 value={maxGuests}
                 onChange={(ev) => setMaxGuests(ev.target.value)}
+              ></input>
+            </div>
+
+            <div>
+              <h3 className="mt-2 -mb-1">Price per night</h3>
+              <input
+                type="number"
+                value={price}
+                onChange={(ev) => setPrice(ev.target.value)}
               ></input>
             </div>
           </div>
