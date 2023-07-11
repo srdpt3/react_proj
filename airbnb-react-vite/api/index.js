@@ -34,6 +34,15 @@ app.get("/test", (req, res) => {
   res.json("test ok");
 });
 
+function getUserDataFromToken(req) {
+  return new Promise((resolve, reject) => {
+    jwt.verify(req.cookies.token, jwtSecret, {}, async (err, userData) => {
+      if (err) throw err;
+      resolve(userData);
+    });
+  });
+}
+
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -217,11 +226,12 @@ app.get("/places", async (req, res) => {
 
 app.post("/bookings", (req, res) => {
   const { token } = req.cookies;
-
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+    if (err) throw err;
     const { place, checkIn, checkOut, numberOfGuests, name, phone, price } =
       req.body;
     Booking.create({
+      user: userData.id,
       place,
       checkIn,
       checkOut,
@@ -237,6 +247,11 @@ app.post("/bookings", (req, res) => {
         throw err;
       });
   });
+});
+
+app.get("/bookings", async (req, res) => {
+  const userData = await getUserDataFromToken(req);
+  res.json(await Booking.find({ user: userData.id }).populate("place"));
 });
 
 app.listen(4000);
