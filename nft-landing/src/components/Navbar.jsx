@@ -35,5 +35,32 @@ const Nav = styled.nav`
   justify-content: space-between;
   align-items: center;
   margin: 2rem;
+  .toggle {
+    display: none;
+  }
+  .links {
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
+    padding: 2.5rem 8rem;
+    ul {
+      display: flex;
+      list-style: none;
+      gap: 3rem;
+      li {
+        a {
+          color: #002000;
+          text-decoration: none;
+          transition: 0.4s ease-in-out;
+          &:hover {
+            color: #2d69fd;
+          }
+        }
+      }
+    }
+  }
 `;
 export default Navbar;

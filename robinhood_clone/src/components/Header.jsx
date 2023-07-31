@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "../assets/robinhood.svg";
-import Icon from "@mui/material/Icon";
+import SearchOutlined from "@mui/icons-material/SearchOffOutlined";
+import "./Header.css";
 const Header = () => {
   return (
     <div className="flex flex-col">
@@ -11,6 +12,7 @@ const Header = () => {
       <div className="header__search">
         <div className="header__searchContainer">
           {/* <Icon>Sear</Icon> */}
+          <SearchOutlined />
           <input placeholder="Search" type="text"></input>
         </div>
       </div>
